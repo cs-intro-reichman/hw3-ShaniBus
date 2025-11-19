@@ -25,43 +25,96 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		  if (x2 > 0) {
+			while (x2 > 0) {
+				x1++;   
+				x2--;
+			}
+		} 
+		else {
+			while (x2 < 0) {
+				x1--;
+				x2++;
+			}
+		}
+		return x1;
 	}
 
-	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x2 > 0) {
+			while (x2 > 0) {
+				x1--;
+				x2--;
+			}
+		}
+		else {
+			while (x2 < 0) {
+				x1++;
+				x2++;
+			}
+		}
+		return x1;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x1 == 0 || x2 == 0) return 0;
+		boolean negative = false;
+		int result = 0;
+		if (x1 < 0 && x2 > 0 || x1 > 0 && x2 < 0) {
+			negative = true;
+		}
+		if (x1 < 0) x1 = minus(0, x1);
+		if (x2 < 0) x2 = minus(0, x2);
+		while (x2 > 0) {
+			result = plus(result, x1);
+			x2--;
+		}
+		if (negative == true) result = minus(0, result);
+		return result;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		if (n == 0) return 1;
+		if (n == 1) return x;
+		int result = x;
+		while (n > 1) {
+			result = times(result, x);
+			n--;
+		}
+		return result;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x1 == 0) return 0;
+		boolean negative = false;
+		if ((x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0)) negative = true;
+		if (x1 < 0) x1 = minus(0, x1);
+		if (x2 < 0) x2 = minus(0, x2);
+		int count = 0;
+		while (minus(x1, x2) >= 0) {
+			count++;
+			x1 = minus(x1, x2);
+		}
+		if (negative == true) count = minus(0, count);
+		return count;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x1 == 0) return 0;
+		int remainder;
+		remainder = minus(x1, times(div(x1, x2), x2));
+		return remainder;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+		if (x == 0) return 0;
+		int i = 1;
+		while (minus(times(i, i), x) <= 0) i++;
+		return minus(i, 1);
 	}	  	  
 }
